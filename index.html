@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom & Loop | Natural & Crochet Flower Studio</title>
+    <style>
+        /* --- GLOBAL & VARIABLES --- */
+        :root {
+            --primary-color: #5d7052;
+            --secondary-color: #d8a47f;
+            --accent-color: #e88d72;
+            --bg-light: #fdfbf7;
+            --card-bg: #ffffff;
+            --text-dark: #2c3531;
+            --text-muted: #66706e;
+            --border-radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            border-bottom: 1px solid #eae5dc;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+            font-weight: 300;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .cart-btn:hover {
+            background: #4a5a41;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background-color: #4a5a41;
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .hero-banner-img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        /* --- CATEGORIES & FILTERS --- */
+        .filter-section {
+            max-width: 1200px;
+            margin: 3rem auto 1rem;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 1px solid #e0e0e0;
+            padding: 0.6rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* --- PRODUCT GRID --- */
+        .products-grid {
+            max-width: 1200px;
+            margin: 2rem auto 5rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .product-image-container {
+            width: 100%;
+            height: 260px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        .tag-natural {
+            background-color: rgba(209, 231, 221, 0.95);
+            color: #0f5132;
+        }
+
+        .tag-crochet {
+            background-color: rgba(248, 215, 218, 0.95);
+            color: #842029;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .product-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .add-to-cart-btn {
+            background: var(--bg-light);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* --- MODAL / CART OVERLAY --- */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+            transition: var(--transition);
+            z-index: 1001;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-modal.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .close-cart {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin: 1rem 0;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .cart-item-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+            .cart-modal {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">Bloom <span>& Loop</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="cart-btn" onclick="toggleCart()">
+                🛒 Cart (<span id="cart-count">0</span>)
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>Fresh Blooms & Timeless Crochet Art</h1>
+            <p>Discover our unique blend of fresh, organic floral arrangements and hand-knit yarn bouquets that keep memories alive forever.</p>
+            <div class="hero-buttons">
+                <a href="#shop" class="btn-primary">Explore Collection</a>
+                <a href="#about" class="btn-secondary">Our Story</a>
+            </div>
+        </div>
+        <div>
+            <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=800&q=80" alt="Hero Flower Bouquet" class="hero-banner-img">
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="filter-section" id="shop">
+        <h2 class="section-title">Our Featured Bouquets</h2>
+        <p class="section-subtitle">Choose between fresh natural blossoms or everlasting crochet craftsmanship.</p>
+        
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterProducts('all', event)">All Bouquets</button>
+            <button class="filter-btn" onclick="filterProducts('natural', event)">Natural Flowers</button>
+            <button class="filter-btn" onclick="filterProducts('crochet', event)">Crochet Flowers</button>
+        </div>
+    </section>
+
+    <div class="products-grid" id="products-container">
+        <!-- JS renders products here -->
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Your Shopping Cart</h3>
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p>Your cart is empty.</p>
+        </div>
+        <div class="cart-footer">
+            <p style="margin-bottom: 1rem; font-weight: 700;">Total: $<span id="cartTotal">0.00</span></p>
+            <button class="checkout-btn" onclick="alert('Proceeding to checkout!')">Checkout Now</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <h3>Bloom & Loop</h3>
+                <p>Bringing nature and handcrafted art together into every bouquet.</p>
+            </div>
+            <div>
+                <h4>Shop Categories</h4>
+                <p>Fresh Flowers</p>
+                <p>Crochet Flowers</p>
+                <p>Custom Arrangements</p>
+            </div>
+            <div>
+                <h4>Contact Us</h4>
+                <p>Email: hello@bloomandloop.com</p>
+                <p>Phone: +1 (555) 234-5678</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Bloom & Loop Studio. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: 'Spring Meadows Bouquet',
+                category: 'natural',
+                price: 45.00,
+                image: 'https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80',
+                description: 'A vibrant blend of seasonal tulips, wild daisies, and fresh eucalyptus.'
+            },
+            {
+                id: 2,
+                name: 'Eternal Rose Bunch',
+                category: 'crochet',
+                price: 52.00,
+                image: 'https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=600&q=80',
+                description: 'Hand-knitted deep red yarn roses that remain perfect for years to come.'
+            },
+            {
+                id: 3,
+                name: 'Sunlit Sunflower Mix',
+                category: 'natural',
+                price: 38.00,
+                image: 'https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=600&q=80',
+                description: 'Bright golden sunflowers bundled with fresh baby’s breath.'
+            },
+            {
+                id: 4,
+                name: 'Crochet Pastel Daisy Stem',
+                category: 'crochet',
+                price: 28.00,
+                image: 'https://images.unsplash.com/photo-1535242208474-9a2793260ca8?auto=format&fit=crop&w=600&q=80',
+                description: 'Soft pastel shade yarn daisies wrapped in aesthetic craft paper.'
+            },
+            {
+                id: 5,
+                name: 'Velvet Lavender Dreams',
+                category: 'natural',
+                price: 42.00,
+                image: 'https://images.unsplash.com/photo-1528722828814-77b9b83aafb2?auto=format&fit=crop&w=600&q=80',
+                description: 'Fragrant organic lavender stems paired with fresh white lilies.'
+            },
+            {
+                id: 6,
+                name: 'Handcrafted Tulip Delight',
+                category: 'crochet',
+                price: 48.00,
+                image: 'https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=600&q=80',
+                description: 'Set of 5 custom crochet tulips with flexible wire stems.'
+            }
+        ];
+
+        let cart = [];
+
+        function renderProducts(filter = 'all') {
+            const container = document.getElementById('products-container');
+            container.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? products 
+                : products.filter(p => p.category === filter);
+
+            filtered.forEach(p => {
+                const tagClass = p.category === 'natural' ? 'tag-natural' : 'tag-crochet';
+                const tagText = p.category === 'natural' ? 'Fresh Natural' : 'Handmade Crochet';
+
+                container.innerHTML += `
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <span class="tag ${tagClass}">${tagText}</span>
+                            <img src="${p.image}" alt="${p.name}" class="product-img">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${p.name}</h3>
+                            <p class="product-desc">${p.description}</p>
+                            <div class="product-footer">
+                                <span class="price">$${p.price.toFixed(2)}</span>
+                                <button class="add-to-cart-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterProducts(type, evt) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            if(evt) evt.target.classList.add('active');
+            renderProducts(type);
+        }
+
+        function addToCart(productId) {
+            const item = products.find(p => p.id === productId);
+            cart.push(item);
+            updateCart();
+        }
+
+        function updateCart() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const cartItemsContainer = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                document.getElementById('cartTotal').innerText = '0.00';
+                return;
+            }
+
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartItemsContainer.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+                        <div style="flex-grow: 1;">
+                            <strong>${item.name}</strong>
+                            <div>$${item.price.toFixed(2)}</div>
+                        </div>
+                        <button style="background:none; border:none; color:red; cursor:pointer;" onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('cartTotal').innerText = total.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cartModal').classList.toggle('open');
+        }
+
+        // Initialize display
+        renderProducts();
+    </script>
+</body>
+</html>
